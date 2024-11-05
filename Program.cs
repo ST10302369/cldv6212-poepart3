@@ -1,7 +1,14 @@
+using CloudPart3.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Adding DB Context builder services with options
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+           options.UseSqlServer(builder.Configuration.GetConnectionString("ABCRetailersDEV")));
 
 var app = builder.Build();
 
