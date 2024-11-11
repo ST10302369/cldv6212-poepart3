@@ -20,3 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.spacing-top {
+    margin-top: 100px !important;
+}

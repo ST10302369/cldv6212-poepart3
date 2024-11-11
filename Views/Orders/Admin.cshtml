@@ -1,51 +1,125 @@
 ﻿@model IEnumerable<CloudPart3.Models.OrderAdminViewModel>
- 
-<div class="container-products">
-<h2>Admin - Orders</h2>
- 
-    <table class="table">
-<thead>
-<tr>
-<th>Order ID</th>
-<th>Order Date</th>
-<th>User Email</th>
-<th>Total Price</th>
-<th>Status</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody>
 
+<div class="container-orders spacing-top">
+    <h2>Admin - Orders</h2>
+
+    <table class="table-orders">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>User Email</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach (var order in Model)
-
             {
-<tr>
-<td>@order.OrderId</td>
-<td>@order.OrderDate</td>
-<td>@order.UserEmail</td>
-<td>R @(order.TotalPrice.ToString("0.00"))</td>
-<td>@order.Status</td>
- 
+                <tr class="order-row @(order.Status == "Pending" ? "pending-row" : "")">
+                    <td>@order.OrderId</td>
+                    <td>@order.OrderDate</td>
+                    <td>@order.UserEmail</td>
+                    <td>R @(order.TotalPrice.ToString("0.00"))</td>
+                    <td>@order.Status</td>
                     <td>
-
                         @if (order.Status == "Pending")
-
                         {
-<a asp-action="ProcessOrder" asp-route-id="@order.OrderId" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Approve Order</a>
-
+                            <a asp-action="ProcessOrder" asp-route-id="@order.OrderId" class="btn btn-approve">
+                                <i class="fa fa-check" aria-hidden="true"></i> Approve Order
+                            </a>
                         }
-
                         else
-
                         {
-<span></span>
-
+                            <span>-</span>
                         }
-</td>
-</tr>
-
+                    </td>
+                </tr>
             }
-</tbody>
-</table>
+        </tbody>
+    </table>
 </div>
- 
+
+<style>
+    .spacing-top {
+        margin-top: 100px !important;
+    }
+
+    /* Container Styling */
+    .container-orders {
+        font-family: Arial, sans-serif;
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+        /* Heading Styling */
+        .container-orders h2 {
+            color: #FF4400;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+    /* Table Styling */
+    .table-orders {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 1em;
+    }
+
+        .table-orders thead th {
+            background-color: #FF4400;
+            color: #fff;
+            padding: 12px;
+            border-top: 2px solid #000;
+            font-weight: bold;
+        }
+
+        .table-orders tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Alternating Row Colors */
+        .table-orders tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table-orders tbody tr.pending-row {
+            background-color: #fff9e6;
+        }
+
+        /* Status Styling */
+        .table-orders tbody tr td .pending-row td {
+            color: #cc3700;
+            font-weight: bold;
+        }
+
+    /* Button Styling */
+    .btn-approve {
+        background-color: #FF4400;
+        color: #fff;
+        padding: 8px 12px;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-approve:hover {
+            background-color: #cc3700;
+        }
+
+        /* Icon Styling */
+        .btn-approve i {
+            margin-right: 5px;
+        }
+</style>

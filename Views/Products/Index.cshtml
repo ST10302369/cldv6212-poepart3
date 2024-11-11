@@ -7,18 +7,16 @@
 <div class="container-products">
     <h1>Product Inventory</h1>
 
-
     <a class="create-new" asp-action="Create">Create New</a>
-
 
     <div class="filter-container">
         <p>Filter By Category:</p>
         @using (Html.BeginForm("Index", "Products", FormMethod.Get))
         {
-            <div class="form-group">
+            <div class="form-group-inline">
                 @Html.DropDownList("category", ViewBag.Category as SelectList, "All Categories", new { @class = "form-control" })
+                <button type="submit" class="btn btn-primary">Filter</button>
             </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
         }
     </div>
 
@@ -56,3 +54,126 @@
         </tbody>
     </table>
 </div>
+
+<style>
+    /* Main Container Styling */
+    .container-products {
+        font-family: Arial, sans-serif;
+        color: #000;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+        /* Heading */
+        .container-products h1 {
+            color: #FF4400;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+    /* Create New Button */
+    .create-new {
+        display: inline-block;
+        background-color: #FF4400;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        margin-bottom: 20px;
+    }
+
+        .create-new:hover {
+            background-color: #cc3700;
+        }
+
+    /* Filter Section */
+    .filter-container {
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .filter-container p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+    .form-group-inline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .form-group-inline .form-control {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: auto; /* Ensures it doesn’t take full width */
+        }
+
+    .btn-primary {
+        background-color: #FF4400;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #cc3700;
+        }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table thead {
+            background-color: #FF4400;
+            color: #fff;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tbody tr:hover {
+            background-color: #ffe6cc;
+        }
+
+        /* Image Styling */
+        table img {
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+    /* Action Links Styling */
+    .actions a {
+        color: #FF4400;
+        text-decoration: none;
+        margin-right: 10px;
+        font-weight: bold;
+        display: inline-block;
+        transition: color 0.3s;
+    }
+
+        .actions a:hover {
+            color: #cc3700;
+        }
+</style>

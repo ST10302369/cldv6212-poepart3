@@ -1,57 +1,52 @@
 ﻿@model CloudPart3.Models.Product
 
 @{
-
     ViewData["Title"] = "Details";
-
 }
 
-<div class="container-product">
-    <h1>Details</h1>
+<div class="container-product spacing-top">
+    <h1>Product Details</h1>
 
-    <div class="product-details-container">
+    <div class="product-details-container ">
         <div class="product-details-header">
-
-            Product Details
+            Product Information
         </div>
         <div class="product-details-content">
             <div class="row">
-                <div class="col-sm-3">
-                    <img src="@Model.ImageUrlpath" class="product-image" />
+                <div class="col-sm-4">
+                    <img src="@Model.ImageUrlpath" alt="Product Image" class="product-image" />
                 </div>
-                <div class="col-sm-9">
-                    <div class="product-details-label">Name:</div>
-                    <div class="product-details-value">@Model.Name</div>
-
-                    <div class="product-details-label">Description:</div>
-                    <div class="product-details-value">@Model.ProductDescription</div>
-
-                    <div class="product-details-label">Price:</div>
-                    <div class="product-details-value">@Model.Price</div>
-
-                    <div class="product-details-label">Category:</div>
-                    <div class="product-details-value">@Model.Category</div>
-
-                    <div class="product-details-label">Availability:</div>
-                    <div class="product-details-value availability">
-
-                        @{
-
-                            if (Model.Availability.HasValue && Model.Availability.Value)
-
-                            {
-                                <p class="available-true">Available</p>
-
+                <div class="col-sm-8 product-info">
+                    <div class="product-details-item">
+                        <span class="product-details-label">Name:</span>
+                        <span class="product-details-value">@Model.Name</span>
+                    </div>
+                    <div class="product-details-item">
+                        <span class="product-details-label">Description:</span>
+                        <span class="product-details-value">@Model.ProductDescription</span>
+                    </div>
+                    <div class="product-details-item">
+                        <span class="product-details-label">Price:</span>
+                        <span class="product-details-value">$@Model.Price</span>
+                    </div>
+                    <div class="product-details-item">
+                        <span class="product-details-label">Category:</span>
+                        <span class="product-details-value">@Model.Category</span>
+                    </div>
+                    <div class="product-details-item">
+                        <span class="product-details-label">Availability:</span>
+                        <span class="product-details-value">
+                            @{
+                                if (Model.Availability.HasValue && Model.Availability.Value)
+                                {
+                                    <span class="available">Available</span>
+                                }
+                                else
+                                {
+                                    <span class="unavailable">Out of Stock</span>
+                                }
                             }
-
-                            else
-
-                            {
-                                <p class="available-false">Out of Stock</p>
-
-                            }
-
-                        }
+                        </span>
                     </div>
                 </div>
             </div>
@@ -59,9 +54,126 @@
     </div>
 
     <div class="product-options">
-        <a asp-action="Edit" asp-route-id="@Model?.ProductId" class="btn btn-primary">Edit</a> |
+        <a asp-action="Edit" asp-route-id="@Model?.ProductId" class="btn btn-primary">Edit</a>
         <a asp-action="Index" class="btn btn-secondary">Back to List</a>
     </div>
-
 </div>
 
+<style>
+    .spacing-top {
+        margin-top: 100px !important;
+    }
+
+    /* Main Container Styling */
+    .container-product {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+        /* Header Styling */
+        .container-product h1 {
+            color: #FF4400;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+    /* Product Details Section */
+    .product-details-container {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
+
+    .product-details-header {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #FF4400;
+        margin-bottom: 15px;
+    }
+
+    .product-details-content {
+        display: flex;
+        gap: 20px;
+    }
+
+    .product-image {
+        width: 100%;
+        max-width: 200px;
+        border-radius: 8px;
+        object-fit: cover;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .product-details-item {
+        margin-bottom: 10px;
+    }
+
+    .product-details-label {
+        font-weight: bold;
+        color: #333;
+        margin-right: 5px;
+    }
+
+    .product-details-value {
+        color: #555;
+    }
+
+    /* Availability Styling */
+    .available {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .unavailable {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    /* Button Styling */
+    .product-options {
+        margin-top: 20px;
+    }
+
+    .btn-primary, .btn-secondary {
+        display: inline-block;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin: 0 10px;
+        color: #fff;
+    }
+
+    .btn-primary {
+        background-color: #FF4400;
+    }
+
+        .btn-primary:hover {
+            background-color: #cc3700;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+</style>

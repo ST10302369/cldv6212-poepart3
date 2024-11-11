@@ -1,14 +1,13 @@
-﻿@model IEnumerable<CloudPart3.Models.OrderHistoryViewModel>
+﻿@model IEnumerable<CloudPart3.Models.OrderHistoryViewModel> 
 
 @{
-
     ViewData["Title"] = "Order History";
-
 }
-<div class="container-products">
+
+<div class="container-order-history spacing-top">
     <h2>Order History</h2>
 
-    <table class="table table-striped">
+    <table class="table-order-history">
         <thead>
             <tr>
                 <th>Order ID</th>
@@ -18,18 +17,102 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach (var order in Model)
-
             {
-                <tr>
+                <tr class="order-row">
                     <td>@order.OrderId</td>
                     <td>@order.OrderDate</td>
                     <td>R @order.TotalPrice</td>
                     <td>@order.Status</td>
                 </tr>
-
             }
         </tbody>
     </table>
 </div>
+
+<style>
+    .spacing-top {
+        margin-top: 100px !important;
+    }
+
+    /* Container Styling */
+    .container-order-history {
+        font-family: Arial, sans-serif;
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Heading Styling */
+    .container-order-history h2 {
+        color: #FF4400;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* Table Styling */
+    .table-order-history {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 1em;
+    }
+
+    .table-order-history thead {
+        background-color: #FF4400;
+        color: #fff;
+    }
+
+    .table-order-history thead th {
+        padding: 12px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .table-order-history tbody td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Alternating Row Colors */
+    .table-order-history tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table-order-history tbody tr:hover {
+        background-color: #f2f2f2;
+    }
+
+    /* Status Column Styling */
+    .table-order-history tbody tr td {
+        color: #333;
+    }
+
+    .table-order-history tbody tr td:last-child {
+        font-weight: bold;
+    }
+
+    /* Styling for Status */
+    .table-order-history tbody tr td:nth-child(4) {
+        color: #009933;
+    }
+
+    .table-order-history tbody tr td:nth-child(4):contains('Pending') {
+        color: #cc3700;
+    }
+
+    .table-order-history tbody tr td:nth-child(4):contains('Shipped') {
+        color: #009933;
+    }
+
+    .table-order-history tbody tr td:nth-child(4):contains('Cancelled') {
+        color: #ff4400;
+    }
+
+</style>
