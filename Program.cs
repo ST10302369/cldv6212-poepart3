@@ -31,8 +31,11 @@ builder.Services.AddSingleton<AzureFileShareService>(sp =>
 
 
 //Adding DB Context builder services with options
+//builder.Services.AddDbContext<ApplicationDBContext>(options =>
+//           options.UseSqlServer(builder.Configuration.GetConnectionString("ABCRetailersDEV")));
+
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
-           options.UseSqlServer(builder.Configuration.GetConnectionString("ABCRetailersDEV")));
+           options.UseSqlServer(builder.Configuration.GetConnectionString("ABCRetailersLive")));
 
 //Added service for Authorization for Role based Access
 builder.Services.AddDefaultIdentity<IdentityUser>().AddDefaultTokenProviders()
@@ -63,5 +66,87 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.Run();
